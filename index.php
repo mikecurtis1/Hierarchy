@@ -36,19 +36,23 @@ $header_row = array_shift($rows);
 $tag_sets = array();
 foreach ( $rows as $row ) {
 	$fields = str_getcsv($row, ",", "\"");
-	$subgenres = explode(', ', $fields[5]);
-	$genres = explode(', ', $fields[4]);
+	$descriptors = array();
+	if(!empty($fields[4])){
+		$genres = explode(', ', $fields[4]);
+		$descriptors = array_merge($descriptors, $genres);
+	}
+	if(!empty($fields[5])){
+		$subgenres = explode(', ', $fields[5]);
+		$descriptors = array_merge($descriptors, $subgenres);
+	}
 	$key = '#' . strval($fields[0]) . '. ' . $fields[2] . '. (' . $fields[3] . ')';
 	$name = '#' . strval($fields[0]) . '. ' . $fields[2] . '. (' . $fields[3] . ')';
 	$uri = 'https://en.wikipedia.org/w/index.php?search=' . urlencode($fields[2] . '. (' . $fields[3] . ')');
-	$delimited_tags = implode(chr(31), $genres) . chr(31) . implode(chr(31), $subgenres);
+	$delimited_tags = implode(chr(31), $descriptors);
 	$tag_sets[$key]['name'] = $name;
 	$tag_sets[$key]['uri'] = $uri;
 	$tag_sets[$key]['delimited_tags'] = $delimited_tags;
 }
-
-#var_dump($tag_sets);
-#exit;
 
 // create TagReader instance and convert tags to paths
 try {
@@ -56,10 +60,6 @@ try {
 } catch (Exception $e ) {
 	$exceptions[] = $e->getMessage();
 }
-
-#print_r($t->getTagRankLimit());
-#var_dump($t->getTagSets());
-#exit;
 
 // create instance of Hierarchy
 try {
