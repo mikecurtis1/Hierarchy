@@ -1,6 +1,6 @@
 # Hierarchy
 
-A PHP application to generate a hierarchy of items according to descriptor tags.
+A PHP application to generate a hierarchy of items from arbitrary descriptor tags.
 
 $rows = file('rs_500_albums.csv');
 
