@@ -23,7 +23,7 @@ Number,Year,Album,Artist,Genre,Subgenre
 
 ### Generating Internal Descriptor Tag
 
-In the sample file above, genre and subgenre terms are used to generate descriptor tags for each item row. The occurrence of each tag in the entire data file is totalled.
+In the sample file above, genre and subgenre terms are used to generate descriptor tags for each item row. The occurrences of each tag in the entire data file are totalled.
 
 `print_r($t->getTagCounts());`
 
