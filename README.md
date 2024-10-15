@@ -58,6 +58,8 @@ Tags are then hierarchically arranged by tag ranking. Higher ranking tags become
 
 In the following example, delimited_tags holds tag descriptors in their original unordered sequence. Tag_path holds the hierarchically ordered tags. Both properties are internally delimited with the ASCII unit separator to avoid conflict with any print characters in the data file.
 
+When the data file is parsed name and uri properties can be assigned to each item row.
+
 `print_r($t->getTagSets());`
 
 ```
@@ -87,7 +89,10 @@ Array
 
 ### HTML Output Generates a Tree
 
-<h1>Rolling Stone Top 500 Albums</h1>
+Below is a sample slice from the hierarcical tree diagram for the Rolling Stone Top 500 Albums.
+
+
+
 <ul>
 	<li>
 	<span class="collection">Rock</span>
@@ -160,3 +165,31 @@ Array
 	</ul>
 	</li>
 </ul>
+
+```
+├───Rock
+│   │
+│   ├───Hard Rock
+│   ├───#77. Back in Black. (AC/DC)
+│   ├───#200. Highway to Hell. (AC/DC)
+│   ├───#344. Berlin. (Lou Reed)
+│   ├───#415. Van Halen. (Van Halen)
+│   ├───#489. Destroyer. (KISS)
+│   │   │
+│   │   ├───Heavy Metal
+│   │   ├───#62. Appetite for Destruction. (Guns N' Roses)
+│   │   ├───#131. Paranoid. (Black Sabbath)
+│   │   ├───#300. Master of Reality. (Black Sabbath)
+│   │   │
+│   │   ├───Punk
+│   │   │   ├───Garage Rock
+│   │   │   ├───#128. Raw Power. (Iggy and The Stooges)
+│   │   │
+│   │   ├───Glam
+│   │   ├───#159. Alive!. (KISS)
+│   │   │
+│   │   ├───Arena Rock
+│   │   ├───#351. Rust Never Sleeps. (Neil Young & Crazy Horse)
+│   │   ├───#464. Hysteria. (Def Leppard)
+│   │   │
+```
