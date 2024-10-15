@@ -1,6 +1,6 @@
 # Hierarchy
 
-A PHP application to generate a hierarchy of items from arbitrary descriptor tags.
+A PHP application to generate a hierarchy of items from arbitrary item descriptor tags.
 
 ## Sample Data File
 
