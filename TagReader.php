@@ -11,6 +11,7 @@ class TagReader
 	private $_tag_ranks = array();
 	private $_tag_rank_limit = 1;
 	private $_tag_rank_limit_percent = 5;
+	private $_rank_counts = array();
 	private $_top_ranks = array();
 	private $_uncategorized_label = NULL;
 	
@@ -81,15 +82,14 @@ class TagReader
 	}
 	
 	private function _setTagRankLimit(){
-		$rank_count = array();
 		foreach($this->_tag_ranks as $tag => $rank){
-			if(isset($rank_count[$rank])){
-				$rank_count[$rank]++;
+			if(isset($this->_rank_counts[$rank])){
+				$this->_rank_counts[$rank]++;
 			} else {
-				$rank_count[$rank] = 1;
+				$this->_rank_counts[$rank] = 1;
 			}
 		}
-		foreach($rank_count as $rank => $count){
+		foreach($this->_rank_counts as $rank => $count){
 			$rank_percent = $count/count($this->_tag_ranks)*100;
 			if ( $rank_percent <= $this->_tag_rank_limit_percent ) {
 				$this->_top_ranks[$rank] = $rank_percent; 
@@ -133,6 +133,10 @@ class TagReader
 	
 	public function getTagRanks(){
 		return $this->_tag_ranks;
+	}
+	
+	public function getRankCounts(){
+		return $this->_rank_counts;
 	}
 	
 	public function getTopRanks(){
