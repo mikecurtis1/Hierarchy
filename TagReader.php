@@ -90,8 +90,9 @@ class TagReader
 			}
 		}
 		foreach($rank_count as $rank => $count){
-			if($count/count($this->_tag_ranks)*100<=$this->_tag_rank_limit_percent){
-				$this->_top_ranks[$rank] = $count/count($this->_tag_ranks)*100; 
+			$rank_percent = $count/count($this->_tag_ranks)*100;
+			if ( $rank_percent <= $this->_tag_rank_limit_percent ) {
+				$this->_top_ranks[$rank] = $rank_percent; 
 			}
 		}
 		$this->_tag_rank_limit = max(array_keys($this->_top_ranks));
