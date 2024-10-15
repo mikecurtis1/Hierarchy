@@ -5,6 +5,7 @@ A PHP application to generate a hierarchy of items from arbitrary descriptor tag
 ## Sample Data File
 
 `$rows = file('rs_500_albums.csv');`
+
 ```
 Number,Year,Album,Artist,Genre,Subgenre
 1,1967,Sgt. Pepper's Lonely Hearts Club Band,The Beatles,Rock,"Rock & Roll, Psychedelic Rock"
@@ -19,9 +20,13 @@ Number,Year,Album,Artist,Genre,Subgenre
 10,1968,"The Beatles (""The White Album"")",The Beatles,Rock,"Rock & Roll, Pop Rock, Psychedelic Rock, Experimental"
 ...
 ```
+
 ### Generating Internal Descriptor Tag
-In the sample file above, genre and subgenre terms are used to generate descriptor tags for each item row. The occurance of each tag in the entire data file is totalled.
+
+In the sample file above, genre and subgenre terms are used to generate descriptor tags for each item row. The occurrence of each tag in the entire data file is totalled.
+
 `print_r($t->getTagCounts());`
+
 ```
 Array
 (
@@ -32,8 +37,11 @@ Array
     [Classic Rock] => 53
 	...
 ```
+
 Tags are then ranked by frequency of occurance.
+
 `print_r($t->getTagRanks());`
+
 ```
 Array
 (
@@ -45,9 +53,13 @@ Array
     [Country] => 6
 	...
 ```
+
 Tags are then hierarchically arranged by tag ranking. Higher ranking tags are top categories while lower ranking tags become subcategories. An item row's hierarchically ordered tags is set in tag_path.
+
 In the following example, delimited_tags holds tag descriptors in their original unordered sequence. Tag_path holds the hierarchically ordered tags.
+
 `print_r($t->getTagSets());`
+
 ```
     [#19. Astral Weeks. (Van Morrison)] => Array
         (
@@ -57,7 +69,10 @@ In the following example, delimited_tags holds tag descriptors in their original
             [tag_path] => RockClassic RockCountryFolkBluesWorldJazzAcoustic
         )
 ```
+
 Below are the tag rankings in descending order.	
+
+```
 Array
 (
     [Rock] => 1
@@ -68,3 +83,4 @@ Array
     [World] => 13
     [Jazz] => 21
     [Acoustic] => 28
+```
