@@ -84,3 +84,79 @@ Array
     [Jazz] => 21
     [Acoustic] => 28
 ```
+
+### HTML Output Generates a Tree
+
+<h1>Rolling Stone Top 500 Albums</h1>
+<ul>
+	<li>
+	<span class="collection">Rock</span>
+	<ul>
+		<span class="collection">Hard Rock</span>
+		<ul>
+			<li class="member">
+				<a href="https://en.wikipedia.org/w/index.php?search=Back+in+Black.+%28AC%2FDC%29">#77. Back in Black. (AC/DC)</a>
+			</li>
+			<li class="member">
+				<a href="https://en.wikipedia.org/w/index.php?search=Highway+to+Hell.+%28AC%2FDC%29">#200. Highway to Hell. (AC/DC)</a>
+			</li>
+			<li class="member">
+				<a href="https://en.wikipedia.org/w/index.php?search=Berlin.+%28Lou+Reed%29">#344. Berlin. (Lou Reed)</a>
+			</li>
+			<li class="member">
+				<a href="https://en.wikipedia.org/w/index.php?search=Van+Halen.+%28Van+Halen%29">#415. Van Halen. (Van Halen)</a>
+			</li>
+			<li class="member">
+				<a href="https://en.wikipedia.org/w/index.php?search=Destroyer.+%28KISS%29">#489. Destroyer. (KISS)</a>
+			</li>
+			<li>
+			<span class="collection">Heavy Metal</span>
+			<ul>
+				<li class="member">
+					<a href="https://en.wikipedia.org/w/index.php?search=Appetite+for+Destruction.+%28Guns+N%27+Roses%29">#62. Appetite for Destruction. (Guns N' Roses)</a>
+				</li>
+				<li class="member">
+					<a href="https://en.wikipedia.org/w/index.php?search=Paranoid.+%28Black+Sabbath%29">#131. Paranoid. (Black Sabbath)</a>
+				</li>
+				<li class="member">
+					<a href="https://en.wikipedia.org/w/index.php?search=Master+of+Reality.+%28Black+Sabbath%29">#300. Master of Reality. (Black Sabbath)</a>
+				</li>
+			</ul>
+			</li>
+			<li>
+			<span class="COLL:Punk">Punk</span>
+			<ul>
+				<li>
+				<span class="collection">Garage Rock</span>
+				<ul>
+					<li class="member">
+						<a href="https://en.wikipedia.org/w/index.php?search=Raw+Power.+%28Iggy+and+The+Stooges%29">#128. Raw Power. (Iggy and The Stooges)</a>
+					</li>
+				</ul>
+				</li>
+			</ul>
+			</li>
+			<li>
+			<span class="collection">Glam</span>
+			<ul>
+				<li class="member">
+					<a href="https://en.wikipedia.org/w/index.php?search=Alive%21.+%28KISS%29">#159. Alive!. (KISS)</a>
+				</li>
+			</ul>
+			</li>
+			<li>
+			<span class="collection">Arena Rock</span>
+			<ul>
+				<li class="member">
+					<a href="https://en.wikipedia.org/w/index.php?search=Rust+Never+Sleeps.+%28Neil+Young+%26+Crazy+Horse%29">#351. Rust Never Sleeps. (Neil Young & Crazy Horse)</a>
+				</li>
+				<li class="member">
+					<a href="https://en.wikipedia.org/w/index.php?search=Hysteria.+%28Def+Leppard%29">#464. Hysteria. (Def Leppard)</a>
+				</li>
+			</ul>
+			</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
