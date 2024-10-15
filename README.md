@@ -56,7 +56,7 @@ Array
 
 Tags are then hierarchically arranged by tag ranking. Higher ranking tags become top categories while lower ranking tags become subcategories. An item row's hierarchically ordered tags are set in the tag_path property.
 
-In the following example, delimited_tags holds tag descriptors in their original unordered sequence. Tag_path holds the hierarchically ordered tags. Both properties are internally delimited with the ASCII unit separator to avoid conflict with any print characters in the data file.
+In the following example, the delimited_tags property holds tag descriptors in their original un-ordered sequence. Tag_path holds the hierarchically ordered tags. Both properties are internally delimited with the ASCII unit separator to avoid conflict with any print characters in the original data file.
 
 When the data file is parsed name and uri properties can be assigned to each item row.
 
@@ -72,7 +72,7 @@ When the data file is parsed name and uri properties can be assigned to each ite
         )
 ```
 
-Below are the tag rankings in descending order.	
+Below are the tag rankings of that particular item in descending order.	
 
 ```
 Array
@@ -90,8 +90,6 @@ Array
 ### HTML Output Generates a Tree
 
 Below is a sample slice from the hierarcical tree diagram for the Rolling Stone Top 500 Albums.
-
-
 
 <ul>
 	<li>
