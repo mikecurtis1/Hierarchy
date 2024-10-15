@@ -54,7 +54,7 @@ Array
 	...
 ```
 
-Tags are then hierarchically arranged by tag ranking. Higher ranking tags become top categories while lower ranking tags become subcategories. An item row's hierarchically ordered tags is set in tag_path property.
+Tags are then hierarchically arranged by tag ranking. Higher ranking tags become top categories while lower ranking tags become subcategories. An item row's hierarchically ordered tags are set in the tag_path property.
 
 In the following example, delimited_tags holds tag descriptors in their original unordered sequence. Tag_path holds the hierarchically ordered tags. Both properties are internally delimited with the ASCII unit separator to avoid conflict with any print characters in the data file.
 
