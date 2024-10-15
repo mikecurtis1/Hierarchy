@@ -11,6 +11,7 @@ class TagReader
 	private $_tag_ranks = array();
 	private $_tag_rank_limit = 1;
 	private $_tag_rank_limit_percent = 5;
+	private $_top_ranks = array();
 	private $_uncategorized_label = NULL;
 	
 	public function __construct($tag_sets=array(), $uncategorized_label='Miscellaneous'){
@@ -88,13 +89,12 @@ class TagReader
 				$rank_count[$rank] = 1;
 			}
 		}
-		$top_ranks = array();
 		foreach($rank_count as $rank => $count){
 			if($count/count($this->_tag_ranks)*100<=$this->_tag_rank_limit_percent){
-				$top_ranks[$rank] = $count/count($this->_tag_ranks)*100; 
+				$this->_top_ranks[$rank] = $count/count($this->_tag_ranks)*100; 
 			}
 		}
-		$this->_tag_rank_limit = max(array_keys($top_ranks));
+		$this->_tag_rank_limit = max(array_keys($this->_top_ranks));
 	}
 	
 	private function _setTagPaths(){
@@ -132,6 +132,10 @@ class TagReader
 	
 	public function getTagRanks(){
 		return $this->_tag_ranks;
+	}
+	
+	public function getTopRanks(){
+		return $this->_top_ranks;
 	}
 	
 	public function getTagRankLimit(){
