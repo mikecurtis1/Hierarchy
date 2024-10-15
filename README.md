@@ -38,7 +38,7 @@ Array
 	...
 ```
 
-Tags are then ranked by frequency of occurance.
+Tags are then ranked by frequency of occurrence.
 
 `print_r($t->getTagRanks());`
 
