@@ -87,6 +87,13 @@ Array
     [Acoustic] => 28
 ```
 
+Low ranking tag "noise" can be filtered out of the tag path by setting the tag_rank_limit_percent parameter of the TagReader object. Only tags with a higher ranking than the limit will be included in the tag path.
+
+```
+$tag_rank_limit_percent = 0.6;
+$t = new TagReader($tag_sets, $tag_rank_limit_percent);
+```
+
 ### HTML Output Generates a Tree
 
 Below is a sample slice from the hierarcical tree diagram for the Rolling Stone Top 500 Albums.
