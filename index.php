@@ -30,7 +30,7 @@ foreach ( $rows as $row ) {
 }*/
 
 // Open data file and make tag sets. Example #2
-$sys_name = 'Rolling Stone Top 500 Albums';
+/*$sys_name = 'Rolling Stone Top 500 Albums';
 $rows = file('rs_500_albums.csv');
 $header_row = array_shift($rows);
 $tag_sets = array();
@@ -52,38 +52,88 @@ foreach ( $rows as $row ) {
 	$tag_sets[$key]['name'] = $name;
 	$tag_sets[$key]['uri'] = $uri;
 	$tag_sets[$key]['delimited_tags'] = $delimited_tags;
+}*/
+
+// Example #3
+$sys_name = 'Recipes';
+$rows = file('French.csv');
+$header_row = array_shift($rows);
+$tag_sets = array();
+foreach ( $rows as $i => $row ) {
+	$fields = str_getcsv($row, ",", "\"");
+	$descriptors = array();
+	$key = 'ID:' . strval($i+1);
+	$name = strval($fields[0]);
+	$cuisine = strval($fields[6]);
+	$diet = $fields[8];
+	$author = $fields[13];$tags = $fields[14];
+	if(!empty($fields[11])){
+		$ingredients = explode('|', $fields[11]);
+		$descriptors = array_merge($descriptors, $ingredients);
+	}
+	if(!empty($fields[15])){
+		$categories = explode('|', $fields[15]);
+		#$descriptors = array_merge($descriptors, $categories);
+	}
+	if(!empty($cuisine)){
+		array_push($descriptors, $cuisine);
+	}
+	if(!empty($diet)){
+		array_push($descriptors, $diet);
+	}
+	if(!empty($author)){
+		#array_push($descriptors, $author);
+	}
+	if(!empty($name) && !empty($descriptors)){
+		$uri = 'https://en.wikipedia.org/w/index.php?search=' . urlencode($name);
+		$delimited_tags = implode(chr(31), $descriptors);
+		$tag_sets[$key]['name'] = $name;
+		$tag_sets[$key]['uri'] = $uri;
+		$tag_sets[$key]['delimited_tags'] = $delimited_tags;
+	}
 }
 
 // create TagReader instance and convert tags to paths
+$tag_rank_limit_percent = 0.6;
 try {
-	$t = new TagReader($tag_sets);
-} catch (Exception $e ) {
+	$t = new TagReader($tag_sets, $tag_rank_limit_percent);
+} catch (Throwable $e ) {
 	$exceptions[] = $e->getMessage();
 }
 
 // create instance of Hierarchy
 try {
 	$h = Hierarchy::create($sys_name);
-} catch (Exception $e) {
+} catch (Throwable $e) {
 	$exceptions[] = $e->getMessage();
 }
 
 // create and add Members to Hierarchy
-foreach ( $t->getTagSets() as $key => $set ) {
-	try {
-		$key = strval($key);
-		$name = strval($set['name']);
-		$uri = strval($set['uri']);
-		$path = strval($set['tag_path']);
-		$m = Member::create($key, $name, $uri, $path);
-	} catch (Exception $e) {
-		$exceptions[] = $e->getMessage();
+try {
+	foreach ( $t->getTagSets() as $key => $set ) {
+		try {
+			$key = strval($key);
+			$name = strval($set['name']);
+			$uri = strval($set['uri']);
+			$path = strval($set['tag_path']);
+			$m = Member::create($key, $name, $uri, $path);
+		} catch (Throwable $e) {
+			$exceptions[] = $e->getMessage();
+		}
+		try {
+			$h->addMember($m);
+		} catch (Throwable $e) {
+			$exceptions[] = $e->getMessage();
+		}
 	}
-	try {
-		$h->addMember($m);
-	} catch (Exception $e) {
-		$exceptions[] = $e->getMessage();
-	}
+} catch (Throwable $e) {
+	$exceptions[] = $e->getMessage();
+}
+
+// Exceptions
+if (! empty($exceptions) ) {
+	var_dump($exceptions);
+	#exit;
 }
 
 // use HTML display methods of Hierarchy instance
