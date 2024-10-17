@@ -11,12 +11,10 @@
 <h1><?php echo $sys_name; ?></h1>
 <!-- Examine tag reader parameters -->
 <pre>
-<?php echo 'Total tags: ' . count($t->getTagRanks()) . "\n"; ?>
-<?php echo 'Top tag percentage: ' . $t->getTagRankPercentages()[1] . "\n"; ?>
+<?php #echo 'Total tags: ' . count($t->getTagRanks()) . "\n"; ?>
 <?php 
 #print_r($t->getTagCounts());
 #print_r($t->getTagRanks());
-#print_r($t->getTagRankPercentages());
 ?>
 </pre>
 <ul>

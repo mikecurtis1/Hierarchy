@@ -76,10 +76,10 @@ foreach ( $rows as $i => $row ) {
 		#$descriptors = array_merge($descriptors, $categories);
 	}
 	if(!empty($cuisine)){
-		array_push($descriptors, $cuisine);
+		#array_push($descriptors, $cuisine);
 	}
 	if(!empty($diet)){
-		array_push($descriptors, $diet);
+		#array_push($descriptors, $diet);
 	}
 	if(!empty($author)){
 		#array_push($descriptors, $author);
@@ -94,9 +94,9 @@ foreach ( $rows as $i => $row ) {
 }
 
 // create TagReader instance and convert tags to paths
-$tag_rank_limit_percent = 0.6;
+$tag_rank_limit = 7;
 try {
-	$t = new TagReader($tag_sets, $tag_rank_limit_percent);
+	$t = new TagReader($tag_sets, $tag_rank_limit);
 } catch (Throwable $e ) {
 	$exceptions[] = $e->getMessage();
 }

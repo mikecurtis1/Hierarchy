@@ -9,14 +9,10 @@ class TagReader
 	private $_tag_counts = array();
 	private $_tag_index = array();
 	private $_tag_ranks = array();
-	private $_tag_rank_percentages = array();
 	private $_tag_rank_limit = 1;
-	private $_tag_rank_limit_percent = 0;
-	private $_rank_counts = array();
-	private $_top_ranks = array();
 	private $_uncategorized_label = NULL;
 	
-	public function __construct($tag_sets=array(), $percentage=0, $uncategorized_label='Miscellaneous'){
+	public function __construct($tag_sets=array(), $tag_rank_limit=1, $uncategorized_label='Miscellaneous'){
 		$this->_tag_delimiter = chr(31);
 		$this->_path_delimiter = chr(31);
 		if ( is_array($tag_sets) ) { 
@@ -24,10 +20,10 @@ class TagReader
 		} else {
 			throw new Exception('Error: tag_sets must be an array.');
 		}
-		if ( is_numeric($percentage) ) {
-			$this->_tag_rank_limit_percent = $percentage;
+		if ( is_numeric($tag_rank_limit) ) {
+			$this->_tag_rank_limit = $tag_rank_limit;
 		} else {
-			throw new Exception('Error: percentage must be numeric.');
+			throw new Exception('Error: tag_rank_limit must be numeric.');
 		}
 		if ( is_string($uncategorized_label) ) {
 			$this->_uncategorized_label = $uncategorized_label;
@@ -38,7 +34,6 @@ class TagReader
 		$this->_setTagCounts();
 		$this->_setTagIndex();
 		$this->_setTagRanks();
-		$this->_setTagRankLimit();
 		$this->_setTagPaths();
 	}
 	
@@ -89,26 +84,6 @@ class TagReader
 		}
 	}
 	
-	private function _setTagRankLimit(){
-		foreach($this->_tag_ranks as $tag => $rank){
-			if(isset($this->_rank_counts[$rank])){
-				$this->_rank_counts[$rank]++;
-			} else {
-				$this->_rank_counts[$rank] = 1;
-			}
-		}
-		foreach($this->_rank_counts as $rank => $count){
-			$rank_percent = $count/count($this->_tag_ranks)*100;
-			$this->_tag_rank_percentages[$rank] = $rank_percent;
-			if ( $rank_percent <= $this->_tag_rank_limit_percent ) {
-				$this->_top_ranks[$rank] = $rank_percent; 
-			}
-		}
-		if ( ! empty($this->_top_ranks)) {
-			$this->_tag_rank_limit = max(array_keys($this->_top_ranks));
-		}
-	}
-	
 	private function _setTagPaths(){
 		foreach ( $this->_tag_sets as $k => $set ) {
 			$temp = array();
@@ -144,18 +119,6 @@ class TagReader
 	
 	public function getTagRanks(){
 		return $this->_tag_ranks;
-	}
-	
-	public function getRankCounts(){
-		return $this->_rank_counts;
-	}
-	
-	public function getTagRankPercentages(){
-		return $this->_tag_rank_percentages;
-	}
-	
-	public function getTopRanks(){
-		return $this->_top_ranks;
 	}
 	
 	public function getTagRankLimit(){
