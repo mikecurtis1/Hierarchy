@@ -30,7 +30,7 @@ foreach ( $rows as $row ) {
 }*/
 
 // Open data file and make tag sets. Example #2
-/*$sys_name = 'Rolling Stone Top 500 Albums';
+$sys_name = 'Rolling Stone Top 500 Albums';
 $rows = file('rs_500_albums.csv');
 $header_row = array_shift($rows);
 $tag_sets = array();
@@ -52,10 +52,10 @@ foreach ( $rows as $row ) {
 	$tag_sets[$key]['name'] = $name;
 	$tag_sets[$key]['uri'] = $uri;
 	$tag_sets[$key]['delimited_tags'] = $delimited_tags;
-}*/
+}
 
 // Example #3
-$sys_name = 'Recipes';
+/*$sys_name = 'Recipes';
 $rows = file('French.csv');
 $header_row = array_shift($rows);
 $tag_sets = array();
@@ -91,10 +91,10 @@ foreach ( $rows as $i => $row ) {
 		$tag_sets[$key]['uri'] = $uri;
 		$tag_sets[$key]['delimited_tags'] = $delimited_tags;
 	}
-}
+}*/
 
 // create TagReader instance and convert tags to paths
-$tag_rank_limit = 7;
+$tag_rank_limit = 31;
 try {
 	$t = new TagReader($tag_sets, $tag_rank_limit);
 } catch (Throwable $e ) {
